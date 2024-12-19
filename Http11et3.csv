@@ -1,0 +1,11 @@
+Critère,HTTP/1.1,HTTP/3 (basé sur QUIC)
+Protocole sous-jacent,"Basé sur TCP (Transmission Control Protocol)","Basé sur QUIC, qui utilise UDP (User Datagram Protocol)"
+Connexion,"Une seule connexion TCP par session, multiplexée, mais sujette au problème de 'Head-of-Line Blocking'.","Multiplexage natif sur une seule connexion UDP, sans blocage interstream ('Head-of-Line Blocking')."
+Latence,"Poignée de main TCP + Poignée de main TLS, nécessitant plusieurs allers-retours.","Poignée de main combinée TLS/QUIC en un seul aller-retour (1-RTT)."
+Reprise de connexion,"Reprise lente due à l'établissement d'une nouvelle connexion TCP et TLS.","Reprise rapide grâce à 0-RTT et l’utilisation de connexions persistantes via QUIC."
+Multiplexage,"Multiplexage limité ; une requête bloquée peut retarder d'autres requêtes sur la même connexion.","Multiplexage efficace, chaque flux est indépendant des autres."
+Fiabilité,"Garantie par TCP (réémission des paquets perdus).","Gestion intégrée des pertes par QUIC (réémission au niveau du flux)."
+Sécurité,"Chiffrement avec TLS 1.2 ou 1.3 (au-dessus de TCP).","Chiffrement obligatoire intégré à QUIC (TLS 1.3)."
+Performance,"Peut être affectée par la latence élevée, surtout en présence de pertes de paquets.","Optimisée pour les réseaux à forte latence et pertes élevées, avec un débit accru."
+Configuration réseau,"Peut être ralenti par les middleboxes qui inspectent et modifient les paquets TCP/HTTP.","Les paquets QUIC sont encapsulés dans UDP et chiffrés, rendant l'inspection difficile."
+Adoption,"Standard utilisé depuis des décennies, largement compatible avec les réseaux existants.","Relativement nouveau, en cours d'adoption, nécessite des mises à jour côté serveur et client."
